@@ -328,10 +328,10 @@ def apply_theme(theme_name):
 # 🔍 REAL API RESEARCH FUNCTIONS  
 # =========================
 def get_api_keys():
-    """Get API keys from environment"""
+    """Get API keys from secrets or environment"""
     return {
-        "nebius_api_key": os.getenv("NEBIUS_API_KEY"),
-        "serp_api_key": os.getenv("SERP_API_KEY")
+        "nebius_api_key": st.secrets.get("NEBIUS_API_KEY", os.getenv("NEBIUS_API_KEY")),
+        "serp_api_key": st.secrets.get("SERP_API_KEY", os.getenv("SERP_API_KEY"))
     }
 
 def serp_search(query, num_results=5):
@@ -928,4 +928,5 @@ def main():
 
 # Run the application
 if __name__ == "__main__":
+
     main()
